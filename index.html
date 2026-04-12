@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNREAL_DIV | 春景 - Divyanshu Dwivedi</title>
+    
+    <meta
+      name="description"
+      content="Divyanshu Dwivedi is an IT engineer building systems, hardware, and immersive real-time experiences in a Japanese manga inspired WebGL portfolio."
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Space+Mono:wght@400;700&family=Zen+Old+Mincho:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <div id="boot-screen">
+  <div class="boot-text">
+    <p>> UNREAL_DIV.SYS v1.0.4</p>
+    <p>> INITIALIZING WEBGL ENGINE...</p>
+    <p>> MOUNTING SAKURA_MIST.BIN...</p>
+    <p class="blink">> SYSTEM READY_</p>
+  </div>
+</div>
+
+    <div id="cursor" aria-hidden="true"></div>
+    <div class="paper-orb paper-orb-a" aria-hidden="true"></div>
+    <div class="paper-orb paper-orb-b" aria-hidden="true"></div>
+    <div class="kanji-mark" aria-hidden="true">春景</div>
+
+    <div class="frame">
+      <div class="frame-top">
+        <div class="sys-line">UNREAL_DIV.SYS</div>
+        <div class="sys-line">Scene Divicii // 2026</div>
+      </div>
+
+     <div class="hero">
+        <div class="sakura-fall" aria-hidden="true">
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+          <div class="petal"></div>
+        </div>
+
+        <div class="hero-name">ディビアンシュ</div>
+        <div class="hero-copy">
+          <p class="eyebrow">Hardware / Software / Robotics / systems</p>
+          <h1>Divyanshu<br />Dwivedi</h1>
+          <p class="lede">
+      Systems Engineer with 1+ year of industry experience and a strong understanding of computer systems, hardware-software interaction, 
+      and low-level systems. Skilled in analyzing how systems work at a fundamental level to build efficient and reliable 
+      solutions. 
+          </p>
+        </div>
+      </div>
+
+      <div class="frame-bottom">
+        <div>IT_ENGINEER // HARDWARE + SOFTWARE</div>
+        <div>Bhilai / INDIA</div>
+      </div>
+    </div>
+
+    <canvas id="webgl" aria-label="Japanese manga inspired 3D background"></canvas>
+
+    <main class="story">
+      <section class="story-row intro-row">
+        <article class="card reveal is-visible">
+          <div class="card-tag">SCENE_00</div>
+          <h2>A Quiet Morning</h2>
+          <p>
+            A Japanese comic-style riverside scene with layered silver mountains,
+            blossom trees, mist, drifting petals, and temple stonework placed into
+            the scene with real 3D models.
+          </p>
+        </article>
+      </section>
+
+      <section class="story-row">
+        <article class="card reveal">
+          <div class="card-tag">ABOUT_ME_01</div>
+          <h2>From Silicon to Interface</h2>
+          <p>
+         I am a computer science professional and a aspiring polymath at heart, driven by a deep fascination with how science and technology decode the complexities of the world. To me, mathematics is the ultimate universal language—the tool that allows us to represent the entire universe through equations. This perspective fuels my curiosity across the entire technical stack, from the logical gates of an 8-bit CPU to the architecture of modern web applications.
+
+With a degree in Information Technology and over a year of experience as a Software Engineer, I specialize in Full Stack Development with a "systems-first" mindset. I bridge the gap between abstract principles and functional implementation, whether I am building scalable backend architectures or crafting immersive frontend experiences. My background is uniquely built on a rigorous exploration of Electronics, Robotics, and Low-level System Design—the art of engineering software that interacts directly with hardware—allowing me to understand not just that a system works, but how it works at its most fundamental level.
+          </p>
+        </article>
+      </section>
+
+      <section class="story-row right">
+  <article class="card reveal card-sticker">
+    <div class="card-tag">CORE_STRENGTHS_02</div>
+    <h2>What I Bring to the Table</h2>
+    <div class="sticker-content">
+      <div class="skill-item">
+        <strong>Foundational Mastery:</strong> 
+       I possess a strong command of core CS and Electronics subjects that define modern engineering. My expertise includes Data Structures & Algorithms, Operating Systems, Computer Organization & Architecture, Computation Theory, Compilers, and Computer Networks. I complement this with a deep understanding of the physical layer, including Analog Electronics, Digital Logic, Microcontrollers, and IoT. I also recently appeared & qualified for the GATE CSE 2026 exam, achieving a rank in the top 13% over 211,000+ candidates, and I am eager to apply this academic depth to roles that explore complex, interdisciplinary systems.
+      </div>
+      <div class="skill-item">
+        <strong>Full Stack Development:</strong> 
+        I enjoy the challenge of the complete development lifecycle based on MVC architecture. I am proficient in building high-fidelity, responsive UIs using HTML, Advanced CSS for polished animations,layouts and other modern UI frameworks. On the backend, I architect robust systems with Node.js, maintaining a strong focus on data integrity with experience in both NoSQL (MongoDB) and SQL (MySQL) databases, from schema design to complex query optimization.
+      </div>
+      <div class="skill-item">
+        <strong>Hardware-Software Synthesis:</strong> 
+I thrive at the intersection of the physical and digital worlds. My experience ranges from translating mathematical models into custom 3D shaders and game physics to engineering the control logic for autonomous robotic systems. I am equally at home prototyping breadboard circuits as I am writing the high-performance code that brings them to life.
+      </div>
+      <div class="skill-item">
+        <strong>Technical Philosophy:</strong> 
+       Bridging theory and execution. I believe that you cannot truly master Machine Learning without first mastering the machine. While I understand modern AI functionally, I am dedicated to solidifying my foundations in mathematics, physics, and low-level computer architecture. My goal is to build highly optimized, intelligent systems from the absolute ground up.
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="story-row">
+        <article class="card reveal card-dark">
+          <div class="card-tag">ARCHIVE_03</div>
+          <h2 style="border-bottom: 2px solid #fff; padding-bottom: 10px;">Projects</h2>
+          
+          <div class="project-item">
+            <strong class="dark-label">8-bit CPU Design & Simulation</strong>
+            <p>
+              Designed and simulated a fully functional <strong>8-bit CPU architecture</strong> from the gate level. 
+              Implemented a custom Instruction Set Architecture (ISA), control unit logic, and ALU. 
+              <br>This project serves as my foundational proof-of-concept for understanding how software 
+              instructions physically execute on silicon.
+            </p>
+          </div>
+
+          <div class="project-item">
+            <strong class="dark-label">Stack Game 3D (WebGL)</strong>
+            <p>
+           Developed a 3D stack game using Three.js and JavaScript, applied efficient collision resolution algorithms and 
+           gameplay mechanics to enhance user experience and optimized the game loop execution  <br>
+           Boosted user retention by 50% and increased average session duration by optimizing Three.js game loops and 
+implementing responsive collision algorithms 
+            </p>
+            <a class="card-link" href="https://unrealdiv.github.io/StackGame/" target="_blank">Launch</a>
+          </div>
+
+          <div class="project-item">
+            <strong class="dark-label">Bluetooth Robotic Car</strong>
+            <p>
+      Designed and developed a Bluetooth-controlled robotic car using a microcontroller (Arduino) for wireless 
+navigation. <br> Implemented real-time control via smartphone using Bluetooth modules such as HC-06.  <br> ntegrated L298N motor driver to efficiently control DC motors for forward, reverse, and directional 
+movement. <br> Built embedded C code for microcontroller to handle communication, control signals, and sensor input. 
+            </p>
+          </div>
+          
+          <div class="project-item">
+      <strong class="dark-label">Rock Paper Scissors Simulator</strong>
+      <p>
+     Created a simulation of 3 entities Rock Paper and Scissor . <br> Initially these are randomly positioned in space and they interact according to the rule of rock paper and scissors and it shows us the nature of randomness and unpredictability.
+      </p>
+      <a class="card-link" href="https://unrealdiv.github.io/Rock-Paper-Scissors-Simulator/" target="_blank">Launch</a>
+    </div>
+
+
+        <div class="project-item">
+      <strong class="dark-label">Discrete Logic Implementation</strong>
+      <p>
+    Designed and assembled a Diode-Resistor Logic on a breadboard. <br> Built functional AND/OR gates and SR Latches using discrete diodes and resistors to demonstrate fundamental digital switching and 1-bit memory storage. <br> Focused on managing voltage drops and signal integrity without the use of integrated circuits.
+      </p>
+    </div>
+
+    <div class="project-item">
+      <strong class="dark-label">Binary Search Algorithm</strong>
+      <p>
+    This is a visual representation of how binary search algorithm works made in P5.js . Nothing big nothing complex just around 100 lines of code . <br> Also made visualizing skectches for sorting algorithms like insertion sort, quick sort and binary tree working.
+
+
+      </p>
+      <a class="card-link" href="https://unrealdiv.github.io/BinarySearchP5/" target="_blank">Launch</a>
+    </div>
+
+        <div class="project-item">
+      <strong class="dark-label">Football Ground</strong>
+      <p>
+      Modelled our team's football ground in blender 3D and also imported the model into web with three.js. <br> Also attached my old resume onto it just for fun.
+      </p>
+      <a class="card-link" href="https://unrealdiv.github.io/FootballGround/" target="_blank">Launch</a>
+    </div>
+
+
+        </article>
+      </section>
+
+      <section class="story-row right">
+        <article class="card reveal card-dark">
+          <div class="card-tag">SYSTEM_CAPABILITIES_04</div>
+          <h2 style="border-bottom: 2px solid #fff; padding-bottom: 10px;">Technical Skills</h2>
+          
+          <div class="skills-grid">
+            <div class="skill-cluster">
+              <strong class="dark-label">Backend Development</strong>
+              <p>
+            Node.js, Express.js, RESTful API Design, JWT Authentication, MongoDB, Postman, Git, Github, MySQL, Schema Design, Query Optimization 
+              </p>
+            </div>
+
+            <div class="skill-cluster">
+              <strong class="dark-label">Programming Languages:</strong>
+              <p>
+                 C, C++, C#, JavaScript, Python, Arduino IDE, Assembly Programming 
+              </p>
+            </div>
+
+            <div class="skill-cluster">
+              <strong class="dark-label">Frontend Development:</strong>
+              <p>
+              HTML/CSS/JavaScript,React.js, P5.js, MVC Architecture, Responsive UI Design 
+              </p>
+            </div>
+
+            <div class="skill-cluster">
+              <strong class="dark-label">3D Development</strong>
+              <p>
+                Three.js, WebGL, GLSL, 3D Rendering, Shader Programming, 3D Modelling, Blender 3D
+              </p>
+            </div>
+
+            <div class="skill-cluster">
+              <strong class="dark-label">Computer Science Fundamentals</strong>
+            Data Structures & Algorithms, Operating Systems, Computer Networks, Computer 
+Organization & Architecture, Analog & Digital Electronics, Compilers, Computation Theory, Databases, Graph Theory, 
+Discrete Mathematics, Applied Mathematics, Real-Time Simulations, Artificial Intelligence & Machine Learning, Linear 
+Algebra, Calculus.
+            </div>
+
+          </div>
+        </article>
+      </section>
+      
+      <section class="story-row">
+        <article class="card reveal card-dark">
+          <div class="card-tag">HISTORY_LOG_05</div>
+          <h2 style="border-bottom: 2px solid #fff; padding-bottom: 10px;">Education & Experience</h2>
+          
+          <div class="history-grid">
+
+                   <div class="history-item">
+              <strong class="dark-label">Academic Record</strong>
+              <div class="history-detail">
+                <h3>Bhilai Institute of Technology, Durg</h3>
+                <p class="history-meta">B.Tech - Information Technology | 2019 – 2023</p>
+                <p>
+                 Specialized in core Computer Science and Electronics, balancing theoretical foundations with hands-on software development, algorithm design, and embedded hardware projects.
+                  <br><strong>CPI: 8.36</strong>
+                </p>
+              </div>
+            </div>
+
+            <div class="history-item">
+              <strong class="dark-label">Professional Experience</strong>
+              <div class="history-detail">
+                <h3>Capgemini // Software Engineer</h3>
+                <p class="history-meta">June 2024 – July 2025 | Bangalore, India</p>
+                <p>
+                  Engaged in full-lifecycle software development, optimizing backend workflows 
+                  and maintaining scalable system architectures. Applied a "systems-first" 
+                  approach to resolve complex logic bottlenecks and improve service reliability.
+                </p>
+              </div>
+            </div>
+
+     
+          </div>
+        </article>
+      </section>
+
+
+      <!-- <section class="story-row right">
+        <article class="card reveal accent-card">
+          <div class="card-tag">EXEC_02</div>
+          <h2>Stack Game 3D</h2>
+          <p>
+            A Three.js stack game focused on collision precision, game loop
+            tuning, and responsive interaction design.
+            <span>Retention improved by 50%.</span>
+          </p>
+          <a
+            class="card-link"
+            href="https://unrealdiv.github.io/StackGame/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Launch Project
+          </a>
+        </article>
+      </section>
+
+      <section class="story-row">
+        <article class="card reveal">
+          <div class="card-tag">SYSTEM_03</div>
+          <h2>Hardware Thinking</h2>
+          <p>
+            From an 8-bit CPU in Logisim to an Arduino-based self-driving car
+            with ultrasonic sensing and L298N motor control, I like building
+            things where low-level behavior becomes visible and tangible.
+          </p>
+        </article>
+      </section> -->
+
+      <section class="story-row">
+        <article class="card reveal">
+          <div class="card-tag">LINK_06</div>
+          <h2>Connect with me</h2>
+          <p>
+            Feel free to connect with me. Thanks :) 
+          </p>
+          <div class="card-links">
+            
+            <a href="https://www.linkedin.com/in/divyanshudwivedi07/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="mailto:divyanshudw64@gmail.com">Email</a>
+            <a href="https://github.com/UnrealDiv" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="ending">
+        <p>終わり</p>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

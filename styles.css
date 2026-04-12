@@ -1,0 +1,789 @@
+﻿:root {
+  --paper: #fbfbf7;
+  --paper-deep: #f3efe9;
+  --ink: #0f0f10;
+  --ink-soft: #000000;
+  --line: rgba(15, 15, 16, 0.18);
+  --sakura: #f5a8c7;
+  --sakura-deep: #db7ea4;
+  --river: #215485;
+  --river-soft: #7ea8dd;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #edf2f7;
+  color: var(--ink);
+  font-family: "Zen Old Mincho", serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.34;
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 78% 34%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px),
+    radial-gradient(circle at 62% 74%, rgba(0, 0, 0, 0.028) 0 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16));
+  background-size: 140px 140px, 180px 180px, 160px 160px, auto;
+  mix-blend-mode: multiply;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    radial-gradient(circle at 17% 32%, rgba(245, 168, 199, 0.15), transparent 26%),
+    radial-gradient(circle at 80% 18%, rgba(201, 219, 239, 0.32), transparent 30%),
+    radial-gradient(circle at 72% 72%, rgba(245, 168, 199, 0.08), transparent 22%);
+}
+
+#webgl {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  outline: none;
+}
+
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(15, 15, 16, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width 180ms ease,
+    height 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+  backdrop-filter: blur(2px);
+}
+
+#cursor::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--sakura);
+}
+
+.paper-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(38px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.48;
+}
+
+.paper-orb-a {
+  width: 360px;
+  height: 360px;
+  top: -120px;
+  left: -110px;
+  background: radial-gradient(circle, rgba(245, 168, 199, 0.24), rgba(245, 168, 199, 0));
+}
+
+.paper-orb-b {
+  width: 420px;
+  height: 420px;
+  right: -140px;
+  bottom: -160px;
+  background: radial-gradient(circle, rgba(178, 202, 235, 0.28), rgba(178, 202, 235, 0));
+}
+
+.kanji-mark {
+  position: fixed;
+  top: 18%;
+  left: 4%;
+  z-index: 0;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(8rem, 17vw, 13rem);
+  color: var(--ink);
+  opacity: 0.08;
+  line-height: 0.85;
+  pointer-events: none;
+}
+
+.frame {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  padding: 30px 34px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.frame-top,
+.frame-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.sys-line {
+  opacity: 0.82;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.hero-name {
+  writing-mode: vertical-rl;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(4.8rem, 12vw, 8.2rem);
+  line-height: 0.84;
+  color: rgba(15, 15, 16, 0.96);
+  text-shadow: 12px 12px 0 rgba(245, 168, 199, 0.26);
+}
+
+.hero-copy {
+  max-width: 28rem;
+  margin-top: 2.8rem;
+  padding: 1.2rem 1.35rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(244, 247, 251, 0.82));
+  border: 1px solid rgba(15, 15, 16, 0.18);
+  box-shadow: 0 18px 60px rgba(15, 15, 16, 0.1);
+}
+
+.eyebrow {
+  font-family: "Space Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.6rem, 5vw, 4.9rem);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+}
+
+.lede {
+  margin-top: 1rem;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+.story {
+  position: relative;
+  z-index: 18;
+  margin-top: 100vh;
+  padding: 0 10vw 24vh;
+}
+
+.story-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 26vh;
+}
+
+.story-row.right {
+  justify-content: flex-end;
+}
+
+.card {
+  position: relative;
+  width: min(620px, 100%);
+  padding: 34px 34px 32px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 2px solid rgba(15, 15, 16, 0.78);
+  box-shadow:
+    16px 16px 0 rgba(15, 15, 16, 0.16),
+    0 18px 50px rgba(15, 15, 16, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 168, 199, 0.2), transparent 72%);
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15, 15, 16, 0.28), transparent);
+}
+
+.accent-card::before {
+  background: radial-gradient(circle, rgba(126, 168, 221, 0.26), transparent 72%);
+}
+
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.78rem;
+  margin-bottom: 1rem;
+  background: var(--ink);
+  color: white;
+  font-family: "Space Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.card h2 {
+  font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: var(--ink-soft);
+  line-height: 1.92;
+  font-size: 0.96rem;
+}
+
+.card span {
+  color: var(--sakura-deep);
+  font-weight: 700;
+}
+
+.card-link,
+.card-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.4rem;
+  min-width: 80px;
+  padding: 0.84rem 1.1rem;
+  border: 1.6px solid var(--ink);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.74);
+  text-decoration: none;
+  font-family: "Space Mono", monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.card-link:hover,
+.card-links a:hover {
+  background: var(--ink);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.4rem;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(52px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-row {
+  margin-bottom: 20vh;
+}
+
+.ending {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 38vh;
+  position: relative;
+  z-index: 18;
+}
+
+.ending p {
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(3rem, 7vw, 5rem);
+  color: rgba(15, 15, 16, 0.18);
+}
+
+@media (max-width: 960px) {
+  .frame {
+    padding: 22px 18px 20px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    margin-top: 0.4rem;
+    max-width: min(32rem, calc(100vw - 36px));
+  }
+
+  .story {
+    padding: 0 18px 18vh;
+  }
+
+  .story-row,
+  .story-row.right {
+    justify-content: stretch;
+  }
+
+  .card {
+    width: 100%;
+    box-shadow:
+      10px 10px 0 rgba(15, 15, 16, 0.08),
+      0 12px 34px rgba(15, 15, 16, 0.06);
+  }
+}
+
+@media (max-width: 720px) {
+  * {
+    cursor: auto;
+  }
+
+  #cursor {
+    display: none;
+  }
+
+  .kanji-mark {
+    top: 8%;
+    left: auto;
+    right: 2%;
+    font-size: 6rem;
+  }
+
+  .frame-top,
+  .frame-bottom,
+  .eyebrow,
+  .card-tag,
+  .card-link,
+  .card-links a {
+    letter-spacing: 0.1em;
+  }
+
+  .hero-name {
+    font-size: 4.4rem;
+  }
+
+  .hero-copy {
+    padding: 0.9rem 1rem;
+  }
+
+  .card {
+    padding: 26px 22px 24px;
+  }
+}
+
+/* Style for the 'Sticker' Card */
+.card-sticker {
+    background: #fff; /* Keeping the card white like ABOUT_ME_01 */
+    border: 2px solid #000;
+}
+
+/* Specific heading styling inside the items */
+.skill-item strong:first-child {
+    display: inline-block;
+    background-color: #000; /* Black background */
+    color: #fff;            /* White text */
+    padding: 2px 8px;       /* Spacing around the text */
+    margin-bottom: 5px;     /* Space between heading and description */
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+}
+
+.skill-item {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Optional: Subtle divider between items */
+.skill-item:not(:last-child) {
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 15px;
+}
+
+/* Project Item Spacing */
+.project-item {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    border-left: 2px solid #444; /* Subtle line to group project info */
+    padding-left: 20px;
+}
+
+/* Black Background Label for Projects (Matching 'What I Bring to the Table') */
+.dark-label {
+    display: inline-block;
+    background-color: #000; /* Black background */
+    color: #fff;            /* White text */
+    padding: 2px 10px;      /* Spacing around the text */
+    margin-bottom: 10px;    /* Space before the description */
+    font-family: 'Space Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    border: 1px solid #fff; /* Optional: adds a thin white border to pop against card-dark */
+}
+
+/* If the card itself is black (card-dark), we invert the label to white background/black text */
+.card-dark .dark-label {
+    background-color: #000000; 
+    color: #ffffff;
+    border: 1px solid #000;
+}
+
+/* Link styling */
+.card-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #000000; /* Neon blue to match your UI */
+    text-decoration: none;
+    border: 1px solid #000000;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.card-link:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* Skills Grid Layout */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.skill-cluster {
+    padding: 15px;
+    border: 1px solid #555; /* Manga-style dashed borders */
+    transition: transform 0.3s ease;
+}
+
+.skill-cluster:hover {
+    transform: translateY(-5px);
+    border-color: #000000; /* Neon highlight on hover */
+}
+
+.skill-cluster p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-top: 10px;
+    color: #000000; /* Slightly dimmed for better hierarchy */
+}
+
+/* Reusing your black-background headings */
+.skill-cluster .dark-label {
+    background-color: #000000; 
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border: none;
+}
+
+
+/* History Section Layout */
+.history-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.history-item {
+    border-left: 2px solid #555;
+    padding-left: 20px;
+}
+
+.history-detail h3 {
+    font-family: 'Zen Old Mincho', serif;
+    font-size: 1.2rem;
+    margin: 10px 0 5px 0;
+    color: #000000; /* Neon highlight for the title */
+}
+
+.history-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.history-detail p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #000000;
+}
+
+/* Inverting the labels to White on Black for Dark Card */
+.history-item .dark-label {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+}
+
+/* =========================================
+   ZEN ATMOSPHERE: MORNING SAKURA & MIST
+========================================= */
+
+/* 1. The Gentle Breathing Text (Mist Effect) */
+@keyframes zenFloat {
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+  50% { transform: translateY(-8px); filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
+}
+
+.hero {
+  position: relative;
+  overflow: hidden; /* Keeps petals inside the hero area */
+  animation: zenFloat 8s ease-in-out infinite; /* Very slow, calming float */
+}
+
+.hero-name {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 20px rgba(255, 183, 197, 0.4); /* Soft pink glow behind Japanese text */
+  letter-spacing: 5px;
+}
+
+/* 2. The Sakura Container */
+.sakura-fall {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  pointer-events: none; /* Lets you click text through the petals */
+  z-index: 5;
+}
+
+/* 3. Shaping the Petal using Pure CSS Geometry */
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(135deg, #ffc0cb 0%, #ffb7c5 100%); /* Sakura Pink */
+  border-radius: 15px 0px 15px 0px; /* Creates the leaf/petal shape! */
+  opacity: 0.8;
+  animation: fall linear infinite, sway ease-in-out infinite alternate;
+}
+
+/* 4. The Falling Physics */
+@keyframes fall {
+  0% { top: -10%; transform: rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 110%; transform: rotate(360deg); opacity: 0; }
+}
+
+/* 5. The Wind Swaying Physics */
+@keyframes sway {
+  0% { margin-left: 0px; }
+  100% { margin-left: 50px; } /* Gently blows them to the right */
+}
+
+/* 6. Randomizing the Petals so they look natural */
+.petal:nth-child(1) { left: 10%; animation-duration: 7s, 3s; animation-delay: 0s, 0s; transform: scale(1.2); }
+.petal:nth-child(2) { left: 30%; animation-duration: 9s, 4s; animation-delay: 2s, 1s; transform: scale(0.8); }
+.petal:nth-child(3) { left: 50%; animation-duration: 6s, 2s; animation-delay: 4s, 2s; transform: scale(1); }
+.petal:nth-child(4) { left: 70%; animation-duration: 8s, 5s; animation-delay: 1s, 0.5s; transform: scale(1.3); }
+.petal:nth-child(5) { left: 90%; animation-duration: 10s, 3s; animation-delay: 3s, 1.5s; transform: scale(0.9); filter: blur(1px); }
+.petal:nth-child(6) { left: 20%; animation-duration: 11s, 4s; animation-delay: 5s, 0s; transform: scale(0.7); filter: blur(2px); }
+
+/* Change Text Selection Color */
+::selection {
+  background: #ff9cb3; /* Manga Red */
+  color: #fff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000; /* Dark background */
+  border-left: 1px solid #333;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff9cb3; /* Cyan scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff; /* Turns white when you grab it */
+}
+
+#boot-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 10000;
+  display: flex;
+  align-items: flex-end; /* Puts text at the bottom like a real terminal */
+  padding: 40px;
+  font-family: 'Space Mono', monospace;
+  color: #f29cff;
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.boot-text p {
+  margin: 5px 0;
+  font-size: 1rem;
+  opacity: 0;
+  animation: typingLine 0.1s forwards;
+}
+
+.boot-text p:nth-child(1) { animation-delay: 0.2s; }
+.boot-text p:nth-child(2) { animation-delay: 0.6s; }
+.boot-text p:nth-child(3) { animation-delay: 1.0s; }
+.boot-text p:nth-child(4) { animation-delay: 1.4s; color: #fff; }
+
+.blink { animation: blinker 1s linear infinite; }
+
+@keyframes typingLine { to { opacity: 1; } }
+@keyframes blinker { 50% { opacity: 0; } }
+
+/* The class we add via JS to hide it */
+.boot-hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+/* Scroll Reveal Initial State */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px); /* Pushed down slightly */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+/* Scroll Reveal Active State (Triggered by JS) */
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The Manga/Comic Book Spotlight Effect */
+.hero h1 {
+  /* Make the main text fill transparent so the background shows through */
+  color: transparent;
+  
+  /* Give the text a classic comic-book thick outline */
+  -webkit-text-stroke: 1.5px rgba(4, 0, 0, 0.9); 
+  
+  
+  background-image: 
+    /* 1. The Mouse Spotlight (Sharp, hard-edged comic circle) */
+    radial-gradient(
+      circle at var(--cursor-x, -50%) var(--cursor-y, -50%), 
+      #ff003c 0%,       /* Manga Red fill */
+      #ff003c 15%,      /* Hard color stop */
+      transparent 15.5% /* Instant cut-off, no smooth fading */
+    ),
+    /* 2. The Manga Screentone (Halftone dots for the unlit areas) */
+    radial-gradient(
+      circle, 
+      rgba(255, 255, 255, 0.25) 30%, 
+      transparent 35%
+    );
+    
+  /* The spotlight takes up the whole space, the dots repeat every 6px */
+  background-size: 100% 100%, 6px 6px; 
+  
+  /* Clip the patterns to the text */
+  -webkit-background-clip: text, text;
+  background-clip: text, text;
+  
+  position: relative;
+  z-index: 10;
+  transition: transform 0.1s; /* Keeps it smooth if combined with other effects */
+}
+.hero h1 {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3); /* Faint white outline to keep it visible on dark backgrounds */
+  
+  background-image: 
+    /* 1. The Red Action Bubble Spotlight */
+    radial-gradient(
+      circle at var(--cursor-x, -50%) var(--cursor-y, -50%), 
+      #ff003c 0%, 
+      #ff003c 15%, 
+      transparent 15.5% 
+    ),
+    /* 2. Solid Black Fill (Replaces the dots) */
+    linear-gradient(#000000, #000000); 
+    
+  background-size: 100% 100%; 
+  -webkit-background-clip: text, text;
+  background-clip: text, text;
+  position: relative;
+  z-index: 10;
+}
+

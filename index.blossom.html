@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Divyanshu Dwivedi | Sakura Portfolio</title>
+    <meta
+      name="description"
+      content="Divyanshu Dwivedi is an IT engineer creating full-stack systems, hardware-backed experiments, and immersive visual experiences."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+      <div class="paper-noise" aria-hidden="true"></div>
+      <div class="wash wash-a" aria-hidden="true"></div>
+      <div class="wash wash-b" aria-hidden="true"></div>
+      <div class="wash wash-c" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="#hero">
+          <span class="brand-monogram">DD</span>
+          <span class="brand-text">
+            <strong>Divyanshu Dwivedi</strong>
+            <span>IT Engineer</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#work">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="hero">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Watercolor spring / interactive systems / sakura atmosphere</p>
+            <h1>Divyanshu Dwivedi</h1>
+            <p class="hero-role">
+              IT Engineer, computer science and electronics enthusiast.
+            </p>
+            <p class="hero-text">
+              I build at the intersection of software and hardware, moving from
+              backend architecture and systems thinking to WebGL visuals,
+              simulations, and creative real-time experiences.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="#work">View Projects</a>
+              <a
+                class="button secondary"
+                href="https://github.com/UnrealDiv"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                class="button secondary"
+                href="https://www.linkedin.com/in/divyanshudwivedi07/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+
+            <div class="hero-ribbon">
+              <span>GATE CS 2026 Qualified</span>
+              <span>Full Stack + WebGL</span>
+              <span>Software and Hardware</span>
+            </div>
+          </div>
+
+          <aside class="hero-note reveal">
+            <p class="note-kicker">Spring Note</p>
+            <p>
+              A lighter composition inspired by watercolor blossoms, paper
+              texture, and a hazy Japanese morning rather than a dark cinematic
+              scene.
+            </p>
+            <div class="note-tags">
+              <span>Soft palette</span>
+              <span>Falling petals</span>
+              <span>Shader haze</span>
+            </div>
+          </aside>
+
+          <div class="scroll-prompt reveal">
+            <span class="scroll-mark"></span>
+            <span>Scroll to wander through the portfolio</span>
+          </div>
+        </section>
+
+        <section class="section about" id="about">
+          <div class="section-head reveal">
+            <p class="section-kicker">About</p>
+            <h2>Engineering with structure, curiosity, and a softer visual language.</h2>
+          </div>
+
+          <div class="about-layout">
+            <article class="paper-card essay-card reveal">
+              <p>
+                I build at the intersection of software and hardware, driven by
+                a curiosity for how systems work from the ground up. My
+                foundation in computer science shapes how I think: focused on
+                structure, efficiency, and understanding systems beyond the
+                surface. Alongside this, I have explored electronics hands-on
+                with microcontrollers, breadboards, discrete logic, and CPU
+                design. I also enjoy the expressive side of computing through
+                Three.js, WebGL, shaders, and real-time interaction.
+              </p>
+              <p>
+                Across it all, I work full stack, designing and refining systems
+                that are technically strong, visually intentional, and
+                meaningful to use.
+              </p>
+            </article>
+
+            <div class="about-cards">
+              <article class="paper-card brush-card reveal">
+                <p class="mini-kicker">Mindset</p>
+                <h3>Systems-level reasoning</h3>
+                <p>
+                  I like connecting low-level concepts to high-level design so
+                  the experience feels elegant because the core system is solid.
+                </p>
+              </article>
+
+              <article class="paper-card brush-card reveal">
+                <p class="mini-kicker">Exploration</p>
+                <h3>Electronics and embedded work</h3>
+                <p>
+                  Breadboards, Arduino builds, digital logic, and architecture
+                  experiments keep me grounded in the fundamentals.
+                </p>
+              </article>
+
+              <article class="paper-card brush-card reveal">
+                <p class="mini-kicker">Creative Tech</p>
+                <h3>Immersive visual computing</h3>
+                <p>
+                  I enjoy using motion, shader work, and 3D composition to make
+                  interfaces feel alive instead of generic.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section work" id="work">
+          <div class="section-head reveal">
+            <p class="section-kicker">Selected Projects</p>
+            <h2>Work across backend engineering, simulations, graphics, and hardware.</h2>
+          </div>
+
+          <div class="project-stack">
+            <article class="project-sheet feature-sheet reveal">
+              <div class="project-index">01</div>
+              <div class="project-main">
+                <h3>Stack Game 3D</h3>
+                <p>
+                  Developed a 3D stack game using Three.js and JavaScript with
+                  responsive gameplay mechanics, efficient collision resolution,
+                  and an optimized render loop.
+                </p>
+                <p>
+                  Improved retention by 50 percent and increased average session
+                  duration through smoother interactions and better loop
+                  performance.
+                </p>
+              </div>
+              <div class="project-side">
+                <a href="https://unrealdiv.github.io/StackGame/" target="_blank" rel="noreferrer">Live Demo</a>
+                <div class="tag-list">
+                  <span>Three.js</span>
+                  <span>JavaScript</span>
+                  <span>Game Logic</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-sheet offset-sheet reveal">
+              <div class="project-index">02</div>
+              <div class="project-main">
+                <h3>Movie Database Backend API</h3>
+                <p>
+                  Built a scalable RESTful API using Node.js and Express.js to
+                  manage movie records, authentication, reviews, and
+                  personalized watchlists with optimized MongoDB schemas.
+                </p>
+                <p>
+                  Reduced query response time by 40 percent with indexing
+                  strategies and secured routes using JWT with role-based access
+                  control.
+                </p>
+              </div>
+              <div class="project-side">
+                <div class="tag-list">
+                  <span>Node.js</span>
+                  <span>Express.js</span>
+                  <span>MongoDB</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-sheet reveal">
+              <div class="project-index">03</div>
+              <div class="project-main">
+                <h3>Rock Paper Scissors Simulator</h3>
+                <p>
+                  Built an animated world where entities move, sense, and battle
+                  each other according to classic rules using object-oriented
+                  behavior modeling.
+                </p>
+              </div>
+              <div class="project-side">
+                <a href="https://unrealdiv.github.io/Rock-Paper-Scissors-Simulator/" target="_blank" rel="noreferrer">Live Demo</a>
+                <div class="tag-list">
+                  <span>Simulation</span>
+                  <span>OOP</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-sheet offset-sheet reveal">
+              <div class="project-index">04</div>
+              <div class="project-main">
+                <h3>8-bit CPU Design and Simulation</h3>
+                <p>
+                  Designed and built an 8-bit CPU in Logisim, covering fetch,
+                  decode, and execute while creating the ALU, control unit, and
+                  registers for custom instruction execution.
+                </p>
+              </div>
+              <div class="project-side">
+                <div class="tag-list">
+                  <span>CPU Design</span>
+                  <span>Logisim</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-sheet reveal">
+              <div class="project-index">05</div>
+              <div class="project-main">
+                <h3>Bluetooth and Self-Driving Arduino Car</h3>
+                <p>
+                  Built a dual-mode Arduino Uno car with Bluetooth control and
+                  autonomous obstacle avoidance using an ultrasonic sensor and
+                  L298N motor driver.
+                </p>
+              </div>
+              <div class="project-side">
+                <div class="tag-list">
+                  <span>Arduino Uno</span>
+                  <span>Ultrasonic Sensor</span>
+                  <span>L298N</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="project-minis">
+            <article class="mini-project reveal">
+              <p class="mini-kicker">06</p>
+              <h3>Discrete Logic Implementation</h3>
+              <p>
+                Built AND and OR gates plus SR latches on a breadboard using
+                diode-resistor logic with focus on signal integrity.
+              </p>
+            </article>
+
+            <article class="mini-project reveal">
+              <p class="mini-kicker">07</p>
+              <h3>Sorting and Searching Visualizer</h3>
+              <p>
+                Turned abstract algorithms into step-by-step animated learning
+                experiences through interactive visualization.
+              </p>
+            </article>
+
+            <article class="mini-project reveal">
+              <p class="mini-kicker">08</p>
+              <h3>CPU Scheduling Simulator</h3>
+              <p>
+                Implemented FCFS, pre-emptive SJF, and Round Robin scheduling
+                with comparative analysis using waiting and turnaround time.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section skills" id="skills">
+          <div class="section-head reveal">
+            <p class="section-kicker">Technical Skills</p>
+            <h2>A toolkit shaped by software engineering, graphics, and computer science depth.</h2>
+          </div>
+
+          <div class="skills-board">
+            <article class="skill-column reveal">
+              <p class="mini-kicker">Backend</p>
+              <h3>APIs and data systems</h3>
+              <div class="skill-pills">
+                <span>Node.js</span>
+                <span>Express.js</span>
+                <span>RESTful APIs</span>
+                <span>JWT</span>
+                <span>MongoDB</span>
+                <span>MySQL</span>
+                <span>Postman</span>
+                <span>Git</span>
+              </div>
+            </article>
+
+            <article class="skill-column reveal">
+              <p class="mini-kicker">Graphics</p>
+              <h3>3D and interactive visuals</h3>
+              <div class="skill-pills">
+                <span>Three.js</span>
+                <span>WebGL</span>
+                <span>GLSL</span>
+                <span>Shader Programming</span>
+                <span>3D Rendering</span>
+                <span>Blender 3D</span>
+                <span>P5.js</span>
+              </div>
+            </article>
+
+            <article class="skill-column reveal">
+              <p class="mini-kicker">Programming</p>
+              <h3>Implementation range</h3>
+              <div class="skill-pills">
+                <span>C</span>
+                <span>C++</span>
+                <span>C#</span>
+                <span>JavaScript</span>
+                <span>Python</span>
+                <span>Assembly</span>
+                <span>Arduino IDE</span>
+              </div>
+            </article>
+
+            <article class="skill-column reveal">
+              <p class="mini-kicker">Foundations</p>
+              <h3>Core CS, electronics, and testing</h3>
+              <div class="skill-pills">
+                <span>DSA</span>
+                <span>Operating Systems</span>
+                <span>Computer Networks</span>
+                <span>COA</span>
+                <span>Digital Electronics</span>
+                <span>Compilers</span>
+                <span>Graph Theory</span>
+                <span>Discrete Mathematics</span>
+                <span>Automation Testing</span>
+                <span>UFT</span>
+                <span>VBScript</span>
+                <span>SAP Tosca</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section profile" id="education">
+          <div class="section-head reveal">
+            <p class="section-kicker">Profile</p>
+            <h2>Academic grounding with systems-level curiosity and creative energy.</h2>
+          </div>
+
+          <div class="profile-grid">
+            <article class="paper-card reveal">
+              <p class="mini-kicker">Education</p>
+              <h3>Bhilai Institute of Technology, Durg</h3>
+              <p>Bachelor of Technology in Information Technology</p>
+              <p>September 2019 - June 2023</p>
+              <p>CPI: 8.36</p>
+            </article>
+
+            <article class="paper-card reveal">
+              <p class="mini-kicker">Achievement</p>
+              <h3>GATE Computer Science 2026 Qualified</h3>
+              <p>Qualified in March 2026.</p>
+              <p>
+                Reflects strong command of core computer science fundamentals
+                and disciplined preparation.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section contact" id="contact">
+          <article class="contact-card reveal">
+            <div>
+              <p class="section-kicker">Contact</p>
+              <h2>Let's build something thoughtful, calm, and technically sharp.</h2>
+              <p class="contact-copy">
+                If you are looking for someone who enjoys both engineering depth
+                and expressive digital experiences, I would love to connect.
+              </p>
+            </div>
+
+            <div class="contact-links">
+              <a href="mailto:divyanshudw64@gmail.com">divyanshudw64@gmail.com</a>
+              <a href="https://github.com/UnrealDiv" target="_blank" rel="noreferrer">GitHub</a>
+              <a href="https://www.linkedin.com/in/divyanshudwivedi07/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

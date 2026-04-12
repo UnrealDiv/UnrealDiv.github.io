@@ -1,0 +1,346 @@
+:root {
+  --ink: #111111;
+  --ink-soft: #4a4a4a;
+  --paper: #fcfcfc;
+  --paper-shadow: rgba(17, 17, 17, 0.12);
+  --panel-shadow: #111111;
+  --sakura: #ffb7c5;
+  --sakura-deep: #ec86a0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Noto Serif JP", serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.04) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+  background-size: 140px 140px, 180px 180px, 160px 160px, auto;
+  mix-blend-mode: multiply;
+}
+
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+#cursor {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  transition: width 180ms ease, height 180ms ease, background-color 180ms ease;
+}
+
+#cursor::after {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--sakura);
+}
+
+.kanji-bg {
+  position: fixed;
+  top: 14%;
+  left: 4%;
+  z-index: 0;
+  pointer-events: none;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(12rem, 30vw, 24rem);
+  color: var(--ink);
+  opacity: 0.03;
+}
+
+.ui-container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  padding: 34px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+}
+
+.sys-mark {
+  font-weight: 700;
+}
+
+.hero-fixed {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.name-v {
+  writing-mode: vertical-rl;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(4.2rem, 12vw, 8.5rem);
+  line-height: 0.92;
+  text-shadow: 10px 10px 0 rgba(255, 183, 197, 0.34);
+}
+
+.hero-side-note {
+  max-width: 24rem;
+  margin-top: 0.5rem;
+}
+
+.hero-side-note .kicker {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  margin-bottom: 0.7rem;
+}
+
+.hero-side-note h1 {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  line-height: 0.88;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.hero-side-note p:last-child {
+  margin-top: 1rem;
+  font-family: "Space Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.footer-line {
+  opacity: 0.9;
+}
+
+.scroll-wrapper {
+  position: relative;
+  z-index: 100;
+  margin-top: 100vh;
+  padding: 0 12vw 32vh;
+}
+
+.panel-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24vh;
+}
+
+.panel-row.right {
+  justify-content: flex-end;
+}
+
+.manga-panel {
+  position: relative;
+  width: min(680px, 100%);
+  background: #ffffff;
+  border: 6px solid var(--ink);
+  padding: 44px;
+  box-shadow: 18px 18px 0 var(--panel-shadow);
+  transform: skewY(-1deg) rotate(-0.3deg);
+}
+
+.manga-panel::before {
+  content: "";
+  position: absolute;
+  inset: auto 22px 18px auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 183, 197, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.alt-panel {
+  transform: skewY(1deg) rotate(0.25deg);
+}
+
+.intro-panel {
+  margin-top: 6vh;
+}
+
+.contact-panel {
+  width: min(760px, 100%);
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  margin-bottom: 18px;
+  background: var(--ink);
+  color: #ffffff;
+  font-family: "Space Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+}
+
+.manga-panel h2 {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  margin-bottom: 18px;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 0.95;
+}
+
+.manga-panel p {
+  font-family: "Space Mono", monospace;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  line-height: 1.9;
+}
+
+.manga-panel strong {
+  color: var(--ink);
+}
+
+.accent {
+  color: var(--sakura-deep);
+  font-weight: 700;
+}
+
+.panel-link,
+.panel-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  color: var(--ink);
+  font-family: "Space Mono", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 18px;
+}
+
+.panel-links a {
+  margin-top: 0;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  background: #ffffff;
+}
+
+.end-section {
+  height: 52vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.end-section h2 {
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: clamp(4rem, 10vw, 6rem);
+  opacity: 0.14;
+}
+
+@media (hover: hover) {
+  a:hover ~ #cursor,
+  button:hover ~ #cursor {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 900px) {
+  .ui-container {
+    padding: 24px 22px;
+  }
+
+  .hero-fixed {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .name-v {
+    writing-mode: horizontal-tb;
+    text-shadow: 6px 6px 0 rgba(255, 183, 197, 0.34);
+  }
+
+  .scroll-wrapper {
+    padding: 0 1.2rem 28vh;
+  }
+
+  .manga-panel {
+    padding: 28px;
+    box-shadow: 10px 10px 0 var(--panel-shadow);
+  }
+}
+
+@media (max-width: 720px) {
+  * {
+    cursor: auto;
+  }
+
+  #cursor {
+    display: none;
+  }
+
+  .header-line {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+  }
+
+  .kanji-bg {
+    font-size: 10rem;
+  }
+
+  .panel-row,
+  .panel-row.right {
+    justify-content: stretch;
+  }
+
+  .manga-panel {
+    width: 100%;
+    transform: none;
+    border-width: 4px;
+  }
+}

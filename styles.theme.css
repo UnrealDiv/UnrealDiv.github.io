@@ -1,0 +1,571 @@
+:root {
+  --paper: #ffffff;
+  --paper-soft: rgba(255, 255, 255, 0.84);
+  --paper-line: rgba(30, 20, 22, 0.08);
+  --ink: #121010;
+  --ink-soft: #5f5658;
+  --rose: #df7dac;
+  --rose-soft: #f5cade;
+  --rose-wash: rgba(248, 191, 221, 0.52);
+  --mist: rgba(244, 225, 232, 0.52);
+  --shadow: 0 18px 50px rgba(116, 93, 99, 0.08);
+  --content-width: min(1180px, calc(100% - 2rem));
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#webgl-canvas,
+.paper-noise,
+.wash {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+#webgl-canvas {
+  z-index: 0;
+}
+
+.paper-noise {
+  z-index: 1;
+  opacity: 0.14;
+  background-image:
+    radial-gradient(circle at 15% 30%, rgba(30, 20, 22, 0.03) 0 1px, transparent 1px),
+    radial-gradient(circle at 75% 45%, rgba(30, 20, 22, 0.025) 0 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22));
+  background-size: 130px 130px, 170px 170px, auto;
+  mix-blend-mode: multiply;
+}
+
+.wash {
+  z-index: 1;
+  filter: blur(110px);
+  opacity: 0.68;
+}
+
+.wash-a {
+  top: -6%;
+  left: -10%;
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(circle, rgba(246, 191, 220, 0.72), transparent 68%);
+}
+
+.wash-b {
+  top: 12%;
+  right: -8%;
+  width: 28rem;
+  height: 28rem;
+  background: radial-gradient(circle, rgba(245, 208, 227, 0.62), transparent 70%);
+}
+
+.wash-c {
+  top: 62%;
+  left: 24%;
+  width: 22rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(241, 224, 230, 0.58), transparent 72%);
+}
+
+.page-shell {
+  position: relative;
+  z-index: 2;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: 1.2rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.95rem;
+}
+
+.brand-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  font-family: "Zen Old Mincho", "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.brand-text strong {
+  font-weight: 700;
+}
+
+.brand-text span {
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.nav a {
+  padding: 0.68rem 1rem;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  transition: background-color 220ms ease, color 220ms ease, transform 220ms ease;
+}
+
+.nav a:hover {
+  background: rgba(246, 196, 218, 0.22);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.hero,
+.section {
+  width: var(--content-width);
+  margin: 0 auto;
+}
+
+.hero {
+  min-height: 100svh;
+  padding: 8.7rem 0 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 24rem);
+  gap: 2rem;
+  align-items: end;
+  position: relative;
+}
+
+.hero::before {
+  content: "春霞";
+  position: absolute;
+  left: -0.25rem;
+  top: 8.8rem;
+  font-family: "Zen Old Mincho", serif;
+  font-size: clamp(4rem, 9vw, 7rem);
+  color: rgba(0, 0, 0, 0.05);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.18em;
+  pointer-events: none;
+}
+
+.eyebrow,
+.section-kicker,
+.mini-kicker,
+.project-index,
+.note-kicker {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  color: var(--rose);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Zen Old Mincho", "Cormorant Garamond", serif;
+  font-weight: 500;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+h1 {
+  margin-top: 0.8rem;
+  font-size: clamp(4.2rem, 11vw, 8.4rem);
+  max-width: 9ch;
+}
+
+h2 {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  max-width: 14ch;
+}
+
+h3 {
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+}
+
+.hero-copy {
+  max-width: 40rem;
+}
+
+.hero-role {
+  margin: 1rem 0 0;
+  font-size: 1.16rem;
+  color: var(--ink-soft);
+}
+
+.hero-text,
+.essay-card p,
+.brush-card p,
+.project-main p,
+.mini-project p,
+.contact-copy,
+.hero-note p,
+.paper-card p {
+  color: var(--ink-soft);
+  line-height: 1.9;
+  font-size: 1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.8rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 10.5rem;
+  padding: 0.9rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: transform 220ms ease, background-color 220ms ease, border-color 220ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button.primary {
+  background: linear-gradient(135deg, #f4c2db 0%, #ffeaf3 100%);
+}
+
+.button.secondary {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.hero-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+
+.hero-ribbon span,
+.note-tags span,
+.tag-list span,
+.skill-pills span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.48rem 0.84rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.hero-note,
+.paper-card,
+.project-sheet,
+.mini-project,
+.skill-column,
+.contact-card {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(248, 240, 245, 0.22), rgba(255, 255, 255, 0.68)),
+    var(--paper-soft);
+  border: 1px solid var(--paper-line);
+  border-radius: 2rem;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero-note::before,
+.paper-card::before,
+.project-sheet::before,
+.skill-column::before,
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: auto auto -0.8rem -0.8rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 191, 220, 0.28), transparent 68%);
+  pointer-events: none;
+}
+
+.hero-note {
+  padding: 1.4rem;
+  align-self: center;
+  justify-self: end;
+  max-width: 24rem;
+  transform: translateY(4.8rem);
+}
+
+.note-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.scroll-prompt {
+  position: absolute;
+  left: 0;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.scroll-mark {
+  width: 3rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(223, 125, 172, 0.9));
+}
+
+.section {
+  padding: 5rem 0;
+}
+
+.section-head {
+  margin-bottom: 1.6rem;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  gap: 1.4rem;
+}
+
+.essay-card,
+.brush-card,
+.skill-column,
+.contact-card,
+.paper-card,
+.project-sheet,
+.mini-project {
+  padding: 1.55rem;
+}
+
+.about-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-stack {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.project-sheet {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) minmax(180px, 14rem);
+  gap: 1rem;
+  align-items: start;
+}
+
+.feature-sheet {
+  margin-right: 6%;
+}
+
+.offset-sheet {
+  margin-left: 8%;
+}
+
+.project-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+.project-side a,
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.project-minis,
+.skills-board,
+.profile-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-minis {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+
+.skills-board {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.profile-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 1.4rem;
+  align-items: center;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.reveal {
+  animation: bloom-in 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-note {
+  animation-delay: 120ms;
+}
+
+.about-cards .reveal:nth-child(2),
+.project-stack .reveal:nth-child(2),
+.project-minis .reveal:nth-child(2),
+.skills-board .reveal:nth-child(2),
+.profile-grid .reveal:nth-child(2) {
+  animation-delay: 150ms;
+}
+
+.about-cards .reveal:nth-child(3),
+.project-stack .reveal:nth-child(3),
+.project-minis .reveal:nth-child(3),
+.skills-board .reveal:nth-child(3) {
+  animation-delay: 220ms;
+}
+
+@keyframes bloom-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1040px) {
+  .hero,
+  .about-layout,
+  .project-sheet,
+  .project-minis,
+  .skills-board,
+  .profile-grid,
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-note,
+  .feature-sheet,
+  .offset-sheet {
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    border-radius: 1.4rem;
+  }
+
+  .hero {
+    padding-top: 8rem;
+  }
+
+  .hero::before {
+    top: 7.6rem;
+    font-size: clamp(3rem, 12vw, 4.8rem);
+  }
+
+  h1 {
+    font-size: clamp(3.3rem, 16vw, 5.6rem);
+  }
+
+  h2 {
+    font-size: clamp(2.3rem, 10vw, 3.5rem);
+  }
+
+  .hero-note,
+  .paper-card,
+  .project-sheet,
+  .mini-project,
+  .skill-column,
+  .contact-card {
+    padding: 1.25rem;
+  }
+}
