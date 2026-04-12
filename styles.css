@@ -170,7 +170,7 @@ body::after {
   font-family: "Ma Shan Zheng", cursive;
   font-size: clamp(4.8rem, 12vw, 8.2rem);
   line-height: 0.84;
-  color: rgba(15, 15, 16, 0.96);
+  color: rgba(0, 0, 0, 0.96);
   text-shadow: 12px 12px 0 rgba(245, 168, 199, 0.26);
 }
 
