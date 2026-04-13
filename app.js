@@ -2106,3 +2106,40 @@ document.addEventListener('mousemove', (e) => {
     heroTitle.style.setProperty('--cursor-y', `${y}%`);
   }
 });
+
+const sakuraContainer = document.querySelector('.sakura-fall');
+
+if (sakuraContainer) {
+  // Let's go with 40 petals for a nice thick atmosphere
+  for (let i = 0; i < 40; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    
+    // 1. Randomize Horizontal Position
+    petal.style.left = Math.random() * 160 + '%';
+    
+    // 2. Randomize Physics
+    const fallDuration = Math.random() * 7 + 8; // 5s to 12s
+    const swayDuration = Math.random() * 3 + 6; // 2s to 5s
+    const delay = Math.random() * 20;           // Start anytime in the first 10s
+
+    petal.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+    petal.style.animationDelay = `${delay}s, ${delay}s`;
+    
+    // 3. Randomize Size (Scale)
+    const scale = Math.random() * 0.8 + 0.5;
+    petal.style.transform = `scale(${scale})`;
+
+    // 4. ADDING THE BLUR (Depth of Field Effect)
+    // If the petal is very small or very large, we add blur to simulate distance
+    if (scale < 0.6) {
+      petal.style.filter = 'blur(2px)'; // Distant petals
+      petal.style.opacity = '0.4';      // Faded distance
+    } else if (scale > 1.1) {
+      petal.style.filter = 'blur(1px)'; // Very close petals
+    }
+
+    sakuraContainer.appendChild(petal);
+  }
+}
+
