@@ -782,4 +782,46 @@ body::after {
   position: relative;
   z-index: 10;
 }
+.hero-copy {
+  position: relative; 
+}
+
+/* 2. The Floating Avatar */
+.hero-avatar {
+  position: absolute;
+  
+  /* --- USE THESE TO MOVE IT AROUND --- */
+  top: 60px;    /* Moves it up/down */
+  right: 25px;   /* Moves it left/right */
+  /* ----------------------------------- */
+  
+  width: 90px;   /* Size of the photo */
+  height: auto;
+  border-radius: 8px; 
+  z-index: 10;   /* Ensures it stays on top of the background */
+  
+  /* The Manga Ink Style (Optional, but recommended) */
+  /* filter: grayscale(50%) contrast(120%); */
+  border: 1px solid rgba(90, 57, 61, 0.15);
+  box-shadow: 0 8px 24px rgba(121, 80, 87, 0.08);
+  background-color: rgba(255, 255, 255, 0.151);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 760px) {
+  .hero-avatar {
+    /* Adjust position for phone screens */
+    top: -10px;
+    right: 10px;
+    width: 70px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-avatar {
+    top: 40px;     /* Negative value pushes it UP and out of the card! */
+    right: 15px;    /* Keeps it anchored to the right */
+    width: 85px;    /* Slightly larger since it's floating in empty space */
+  }
+}
 
