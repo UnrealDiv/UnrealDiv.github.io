@@ -1113,6 +1113,34 @@
     return bush;
   }
 
+   // 1. Plant a dense forest of 60 bushes along the riverbanks
+  for (let i = 0; i < 60; i += 1) {
+    let bushX = randomBetween(-50, 50);
+    let bushZ = randomBetween(10, -150); 
+    
+    // Safety check: Keep bushes out of the river!
+    // Assuming the river flows roughly between x = -15 and x = 20
+    if (bushX < -18 || bushX > 22) {
+      let bushScale = randomBetween(0.5, 1.6);
+      
+      // Add a slight random color variation (some greener, some browner)
+      let tint = Math.random() > 0.5 ? 0x90a78f : 0x7a9678; 
+      
+      createBushCluster(bushX, bushZ, bushScale, tint);
+    }
+  }
+
+  // 2. Scatter 20 rocks along the shoreline
+  for (let i = 0; i < 20; i += 1) {
+    let rockX = randomBetween(-25, 30);
+    let rockZ = randomBetween(5, -120);
+    
+    // Keep rocks near the water edges
+    if ((rockX > -25 && rockX < -12) || (rockX > 18 && rockX < 30)) {
+       createRock(rockX, rockZ, randomBetween(0.4, 1.2));
+    }
+  }
+
   function createStoneBridge(x, z, scale, rotationY) {
     const bridge = new THREE.Group();
     bridge.position.set(x, GROUND_Y, z);
