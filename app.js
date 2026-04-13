@@ -2012,11 +2012,11 @@
     });
 
     pineTrees.forEach((tree, index) => {
-      tree.rotation.z = Math.sin(elapsed * 0.36 + index * 0.7) * 0.012;
+      tree.rotation.z = Math.sin(elapsed * 0.36 + index * 0.7) * 0.12;
     });
 
     cherryTrees.forEach((tree, index) => {
-      tree.rotation.z = Math.sin(elapsed * 0.44 + index * 0.9) * 0.018;
+      tree.rotation.z = Math.sin(elapsed * 0.44 + index * 0.9) * 0.18;
     });
 
     overhangBranches.forEach((branch, index) => {
