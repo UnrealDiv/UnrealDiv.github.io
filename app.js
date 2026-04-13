@@ -667,6 +667,47 @@
     polygonOffsetUnits: -2,
   });
 
+   
+   
+  // ==========================================
+  // --- PROCEDURAL MANGA CLOUD GENERATOR ---
+  // ==========================================
+  function createCloudTexture() {
+    const canvas = makeCanvas(512, 256);
+    const ctx = canvas.getContext("2d");
+
+    // Create a soft vertical gradient for the cloud volume
+    // White at the top, very faint blue/pink shadow at the bottom
+    const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+    gradient.addColorStop(0, "rgba(159, 145, 145, 0.95)");
+    gradient.addColorStop(0.8, "rgba(35, 99, 227, 0.8)"); 
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+    
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+
+    // Mathematically arrange circles to form a fluffy cluster
+    const puffs = [
+      { x: 120, y: 160, r: 60 },
+      { x: 220, y: 120, r: 90 }, // Main high peak
+      { x: 330, y: 140, r: 75 },
+      { x: 420, y: 170, r: 50 },
+      { x: 280, y: 180, r: 55 }, // Fills the bottom
+      { x: 180, y: 175, r: 50 }  // Fills the bottom
+    ];
+
+    puffs.forEach(puff => {
+      ctx.moveTo(puff.x + puff.r, puff.y);
+      ctx.arc(puff.x, puff.y, puff.r, 0, Math.PI * 2);
+    });
+    
+    ctx.fill();
+
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }
+
   const mossPatchMaterial = new THREE.MeshBasicMaterial({
     map: createMossTexture(1024, 1024),
     transparent: true,
@@ -1112,6 +1153,43 @@
     bushClusters.push(bush);
     return bush;
   }
+
+     // Generate the cloud material once to save memory
+  const cloudMaterial = new THREE.MeshBasicMaterial({
+    map: createCloudTexture(),
+    transparent: true,
+    depthWrite: false,
+    opacity: 0.85,
+    side: THREE.DoubleSide
+  });
+
+  const clouds = [];
+  const cloudGeo = new THREE.PlaneGeometry(80, 40);
+
+  // Scatter 12 clouds across the sky
+  for (let i = 0; i < 12; i++) {
+    const cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
+    
+    // Position them high up and far back
+    let cx = randomBetween(-200, 200);
+    let cy = randomBetween(50, 155); // High in the sky
+    let cz = randomBetween(-200, -350); // Deep in the background
+    
+    cloud.position.set(cx, cy, cz);
+    
+    // Randomize their size and flip some horizontally for variety
+    let scale = randomBetween(0.8, 2.2);
+    cloud.scale.set(Math.random() > 0.5 ? scale : -scale, scale, 1);
+    
+    farGroup.add(cloud);
+    
+    // Store them in an array with a random drift speed
+    clouds.push({
+      mesh: cloud,
+      speed: randomBetween(0.015, 0.035) // Drift speed
+    });
+  }
+   
 
    // 1. Plant a dense forest of 60 bushes along the riverbanks
   for (let i = 0; i < 60; i += 1) {
@@ -2060,6 +2138,21 @@
       sprite.position.x += Math.sin(elapsed * 0.16 + index) * 0.01;
       sprite.material.opacity = 0.06 + Math.sin(elapsed * 0.22 + index) * 0.025 + (index < 2 ? 0.12 : 0.04);
     });
+
+     // --- INSIDE THE animate() FUNCTION ---
+    
+    // Slowly drift the clouds across the sky
+    clouds.forEach((cloudData) => {
+      cloudData.mesh.position.x += cloudData.speed;
+      
+      // If a cloud drifts too far right, wrap it back to the far left
+      if (cloudData.mesh.position.x > 250) {
+        cloudData.mesh.position.x = -250;
+        // Randomize the height slightly when it respawns
+        cloudData.mesh.position.y = randomBetween(35, 65); 
+      }
+    });
+
 
     waterPetals.forEach((petal, index) => {
       petal.mesh.position.x =
