@@ -1955,7 +1955,7 @@
     particle.spin = randomBetween(-0.02, 0.02);
   }
 
-  for (let i = 0; i < 300; i += 1) {
+  for (let i = 0; i < 400; i += 1) {
     const mesh = new THREE.Mesh(petalGeo, petalMaterial);
     nearGroup.add(mesh);
     const particle = { mesh, isLeaf: false, velocityY: 0.02, velocityX: 0, spin: 0 };
