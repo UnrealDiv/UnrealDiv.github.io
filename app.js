@@ -691,7 +691,7 @@
   }
 
   const skyPlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(260, 150),
+    new THREE.PlaneGeometry(1600, 720),
     new THREE.MeshBasicMaterial({
       map: createSkyTexture(
         1600,
