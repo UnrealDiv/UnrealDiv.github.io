@@ -604,7 +604,7 @@ body::after {
 
 .hero-name {
   color: rgba(0, 0, 0, 0.9);
-  text-shadow: 0 0 20px rgba(255, 183, 197, 0.4); /* Soft pink glow behind Japanese text */
+  text-shadow: 0 0 20px rgba(255, 0, 51, 0.843);  /* Soft pink glow behind Japanese text */
   letter-spacing: 5px;
 }
 
